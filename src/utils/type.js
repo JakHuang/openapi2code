@@ -1,0 +1,12 @@
+const __str = Object.prototype.toString;
+export const isString = (val) => __str.call(val) === '[object String]';
+export const isNumber = (val) => __str.call(val) === '[object Number]';
+export const isBoolean = (val) => __str.call(val) === '[object Boolean]';
+export const isArray = (val) => __str.call(val) === '[object Array]';
+export const isNull = (val) => __str.call(val) === '[object Null]';
+export const isUndefined = (val) => __str.call(val) === '[object Undefined]';
+export const isObject = (val) => __str.call(val) === '[object Object]';
+export const isFunction = (val) => __str.call(val) === '[object Function]';
+export const isDate = (val) => __str.call(val) === '[object Date]';
+export const isRegExp = (val) => __str.call(val) === '[object RegExp]';
+export const isSymbol = (val) => __str.call(val) === '[object Symbol]';

@@ -1,0 +1,415 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "kamelnet-fx",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "EOS管理"
+    },
+    {
+      "name": "EOS管理/换汇批次管理"
+    }
+  ],
+  "paths": {
+    "/api/fx/eos/exchange/confirm": {
+      "post": {
+        "summary": "确认交割接口",
+        "x-apifox-folder": "EOS管理/换汇批次管理",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": ["EOS管理/换汇批次管理"],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "",
+                "type": "object",
+                "properties": {
+                  "tradeNo": {
+                    "type": "string",
+                    "description": "换汇批次列表的id值"
+                  }
+                },
+                "x-apifox-orders": ["tradeNo"],
+                "required": ["tradeNo"],
+                "x-apifox-ignore-properties": []
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                },
+                "examples": {
+                  "1": {
+                    "summary": "成功示例 ",
+                    "value": "{\r\n    \"success\":true,\r\n    \"code\":\"000000\",\r\n    \"desc\":\"请求成功\",\r\n    \"data\":null\r\n}\r\n\r\n{\r\n    \"success\":false,\r\n    \"code\":\"009999\",\r\n    \"desc\":\"失败原因\",\r\n    \"data\":null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1421316/apis/api-34798463-run"
+      }
+    },
+    "/api/fx/eos/exchange/bankInfo": {
+      "get": {
+        "summary": "查询渠道收款账号",
+        "x-apifox-folder": "EOS管理/换汇批次管理",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": ["EOS管理/换汇批次管理"],
+        "parameters": [
+          {
+            "name": "tradeNo",
+            "in": "query",
+            "description": "锁价编号,批次列表的id",
+            "required": false,
+            "example": "c997842d58d6dbca3b0b5bcc1",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "状态值"
+                    },
+                    "desc": {
+                      "type": "string",
+                      "description": "接口返回描述"
+                    },
+                    "success": {
+                      "type": "string",
+                      "description": "执行结果"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "tradeNo": {
+                          "type": "string",
+                          "description": "锁价编号"
+                        },
+                        "accountAddress": {
+                          "type": "string",
+                          "description": "账户地址"
+                        },
+                        "accountName": {
+                          "type": "string",
+                          "description": "账户名称"
+                        },
+                        "accountNumber": {
+                          "type": "string",
+                          "description": "账户账号"
+                        },
+                        "swiftCode": {
+                          "type": "string",
+                          "description": "swiftCode"
+                        },
+                        "depositaryBank": {
+                          "type": "string",
+                          "description": "开户银行"
+                        },
+                        "depositaryBankAddress": {
+                          "type": "string",
+                          "description": "开户地址"
+                        },
+                        "depositaryBankLocation": {
+                          "type": "string",
+                          "description": "开户所在地"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "tradeNo",
+                        "accountAddress",
+                        "accountName",
+                        "accountNumber",
+                        "swiftCode",
+                        "depositaryBank",
+                        "depositaryBankAddress",
+                        "depositaryBankLocation"
+                      ],
+                      "required": [
+                        "tradeNo",
+                        "accountAddress",
+                        "accountName",
+                        "accountNumber",
+                        "swiftCode",
+                        "depositaryBank",
+                        "depositaryBankAddress",
+                        "depositaryBankLocation"
+                      ],
+                      "description": "渠道收款账户信息",
+                      "x-apifox-ignore-properties": []
+                    }
+                  },
+                  "x-apifox-orders": ["code", "desc", "success", "data"],
+                  "required": ["code", "desc", "success", "data"],
+                  "x-apifox-ignore-properties": []
+                },
+                "examples": {
+                  "1": {
+                    "summary": "成功示例 ",
+                    "value": "{\r\n \"code\":\"000000\",\r\n\"desc\":\"成功\",\r\n\"success\":true,\r\n\"data\":{\r\n        \"tradeNo\":\"FX_trade1111111112\",\r\n        \"accountAddress\":\"No.7,6th floor,e-commerce Industrial Park,88 Changsheng Road,Jian'an Distinct,Xuchang City,Henan Province\",\r\n        \"accountName\":\"Xuchang Yibao Network Technology Co.,Ltd\",\r\n        \"accountNumber\":\"16266114040001255\",\r\n        \"swiftCode\":\"ICBKCNBJZJP\",\r\n        \"depositaryBank\":\"STANDARD CHARTERED BANK (HONG KONG) LIMITED\",\r\n        \"depositaryBankAddress\":\"开户地址\",\r\n        \"depositaryBankLocation\":\"CN\"\r\n    }\r\n}\r\n\r\n{\r\n \"code\":\"000500\",\r\n\"desc\":\"操作失败\",\r\n\"success\":false,\r\n\"data\":null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1421316/apis/api-34799668-run"
+      }
+    },
+    "/api/fx/eos/exchange/mark": {
+      "post": {
+        "summary": "修改备注信息",
+        "x-apifox-folder": "EOS管理/换汇批次管理",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": ["EOS管理/换汇批次管理"],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "",
+                "type": "object",
+                "properties": {
+                  "tradeNo": {
+                    "type": "string",
+                    "description": "换汇批次列表的id值"
+                  },
+                  "mark": {
+                    "type": "string",
+                    "description": "备注信息"
+                  }
+                },
+                "x-apifox-orders": ["tradeNo", "mark"],
+                "required": ["tradeNo", "mark"],
+                "x-apifox-ignore-properties": []
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                },
+                "examples": {
+                  "1": {
+                    "summary": "成功示例 ",
+                    "value": "{\r\n    \"success\":true,\r\n    \"code\":\"000000\",\r\n    \"desc\":\"请求成功\",\r\n    \"data\":null\r\n}\r\n\r\n{\r\n    \"success\":false,\r\n    \"code\":\"009999\",\r\n    \"desc\":\"失败原因\",\r\n    \"data\":null\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1421316/apis/api-34801268-run"
+      }
+    },
+    "/api/fx/eos/channel/queryTuoList": {
+      "get": {
+        "summary": "查询渠道选项列表",
+        "x-apifox-folder": "EOS管理/换汇批次管理",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": ["EOS管理/换汇批次管理"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-ignore-properties": [],
+                  "x-apifox-orders": []
+                },
+                "examples": {
+                  "1": {
+                    "summary": "成功示例 ",
+                    "value": {
+                      "success": true,
+                      "code": "000000",
+                      "desc": "请求成功",
+                      "data": [
+                        {
+                          "value": "1000000001000000001",
+                          "name": "海云汇(驼驼)"
+                        },
+                        {
+                          "value": "1000000001000000003",
+                          "name": "渣打(驼驼)"
+                        },
+                        {
+                          "value": "1000000001000000004",
+                          "name": "宝付(驼驼)"
+                        },
+                        {
+                          "value": "1000000001000000005",
+                          "name": "连连(驼驼)"
+                        },
+                        {
+                          "value": "1000000003000000006",
+                          "name": "测试渠道配置用"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1421316/apis/api-34885276-run"
+      }
+    },
+    "/api/fx/eos/exchange/tenantTuoList": {
+      "get": {
+        "summary": "查询租户选项列表",
+        "x-apifox-folder": "EOS管理/换汇批次管理",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": ["EOS管理/换汇批次管理"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-ignore-properties": [],
+                  "x-apifox-orders": []
+                },
+                "examples": {
+                  "1": {
+                    "summary": "成功示例 ",
+                    "value": {
+                      "success": true,
+                      "code": "000000",
+                      "desc": "请求成功",
+                      "data": [
+                        {
+                          "value": "1200000004000000001",
+                          "name": "敦煌网"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1421316/apis/api-34885455-run"
+      }
+    },
+    "/api/fx/eos/exchange/statusList": {
+      "get": {
+        "summary": "查询锁汇选项列表",
+        "x-apifox-folder": "EOS管理/换汇批次管理",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": ["EOS管理/换汇批次管理"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-ignore-properties": [],
+                  "x-apifox-orders": []
+                },
+                "examples": {
+                  "1": {
+                    "summary": "成功示例 ",
+                    "value": {
+                      "success": true,
+                      "code": "000000",
+                      "desc": "请求成功",
+                      "data": [
+                        {
+                          "value": 1,
+                          "name": "锁价成功(待交割)"
+                        },
+                        {
+                          "value": 2,
+                          "name": "锁价失败"
+                        },
+                        {
+                          "value": 3,
+                          "name": "锁价异常"
+                        },
+                        {
+                          "value": 4,
+                          "name": "锁价中"
+                        },
+                        {
+                          "value": 5,
+                          "name": "成功交割"
+                        },
+                        {
+                          "value": 6,
+                          "name": "交割逾期"
+                        },
+                        {
+                          "value": 7,
+                          "name": "不完整交割"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1421316/apis/api-34885675-run"
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
