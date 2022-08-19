@@ -12,6 +12,12 @@
           <key-value :field="data.key" :value="data.label" />
           <div>
             <a
+              class="btn-text"
+              @click.prevent.stop="() => generator(node, data)"
+            >
+              生成
+            </a>
+            <a
               v-if="!node.isLeaf && !node.expanded"
               class="btn-text"
               @click.prevent.stop="() => recursivelySetExpanded(node, true)"
@@ -29,12 +35,14 @@
         </div>
       </template>
     </el-tree>
+    <gen-code-dialog v-model="visible" />
   </div>
 </template>
 
 <script>
 import { isArray, isObject } from '../utils/type.js';
 import KeyValue from './KeyValue.vue';
+import GenCodeDialog from './GenCodeDialog.vue';
 
 export default {
   props: {
@@ -45,6 +53,7 @@ export default {
   },
   components: {
     KeyValue,
+    GenCodeDialog,
   },
   computed: {
     dataTree() {
@@ -66,6 +75,7 @@ export default {
   data() {
     return {
       nid: 1,
+      visible: false,
     };
   },
   methods: {
@@ -107,6 +117,10 @@ export default {
           this.recursivelySetExpanded(item, val);
         });
       }
+    },
+    generator(node, data) {
+      console.log(node);
+      this.visible = true;
     },
   },
 };
