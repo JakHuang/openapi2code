@@ -1,20 +1,22 @@
 <template>
   <div class="key-value-item">
-    <span
+    <div
       v-if="field"
       class="key"
       @click.prevent.stop="() => copyObj(field)"
       :title="field"
     >
       {{ field }}
-    </span>
-    <span
-      :class="`value ${typeof value === 'string' ? '' : 'ellipsis'}`"
+    </div>
+    <div
+      :class="`value ${typeof value === 'string' ? '' : 'ellipsis'} ${
+        field ? '' : 'all-radius'
+      }`"
       @click.prevent.stop="() => copyObj(value)"
       :title="typeof value === 'string' ? value : JSON.stringify(value)"
     >
       {{ value }}
-    </span>
+    </div>
   </div>
 </template>
 
@@ -42,12 +44,13 @@ export default {
 
 <style lang="scss" scoped>
 .key-value-item {
-  border-radius: 4px;
   height: 26px;
   overflow: hidden;
+  flex-grow: 1;
+  display: flex;
+  margin-right: 10px;
   .key,
   .value {
-    display: inline-block;
     line-height: 24px;
     margin: 1px 0;
     padding: 0 5px;
@@ -63,17 +66,24 @@ export default {
     }
   }
   .key {
+    border-radius: 4px 0 0 4px;
     background-color: #eee;
     color: #222;
+    flex-shrink: 0;
   }
   .value {
+    border-radius: 0 4px 4px 0;
     background-color: #cfe1ee;
     color: #656774;
     white-space: nowrap;
+    text-overflow: ellipsis;
   }
   .ellipsis {
     max-width: 130px;
     text-overflow: ellipsis;
+  }
+  .all-radius {
+    border-radius: 4px;
   }
 }
 </style>

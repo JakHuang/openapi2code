@@ -57,6 +57,7 @@ export default {
   },
   computed: {
     dataTree() {
+      this.nid = 1;
       const res = [];
       this.buildTreeData('', this.data, res, []);
       return res;
@@ -125,6 +126,7 @@ export default {
   justify-content: space-between;
   font-size: 14px;
   padding-right: 8px;
+  overflow: hidden;
 }
 .btn-text {
   color: #0088fa;
