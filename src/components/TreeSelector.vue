@@ -58,17 +58,7 @@ export default {
   computed: {
     dataTree() {
       const res = [];
-      let arr;
-      if (isObject(this.data)) {
-        arr = [this.data];
-      } else if (isArray(this.data)) {
-        arr = this.data;
-      } else {
-        throw new Error('数据类型错误');
-      }
-      arr.forEach((item) => {
-        this.buildTreeData('', item, res);
-      });
+      this.buildTreeData('', this.data, res, []);
       return res;
     },
   },
@@ -79,35 +69,33 @@ export default {
     };
   },
   methods: {
-    buildTreeData(key, value, res) {
+    buildTreeData(key, value, res, pathArr) {
+      const obj = {
+        id: this.nid++,
+        key,
+        label: value,
+        path: [...pathArr],
+      };
       if (isObject(value)) {
         const res2 = [];
-        res.push({
-          id: this.nid++,
-          key,
-          label: value,
-          children: res2,
-        });
+        obj.children = res2;
+        res.push(obj);
         Object.entries(value).forEach(([key2, value2]) => {
-          this.buildTreeData(key2, value2, res2);
+          const paths = [...pathArr];
+          paths.push(key2);
+          this.buildTreeData(key2, value2, res2, paths);
         });
       } else if (isArray(value)) {
         const res2 = [];
-        res.push({
-          id: this.nid++,
-          key,
-          label: value,
-          children: res2,
-        });
-        value.forEach((item) => {
-          this.buildTreeData('', item, res2);
+        obj.children = res2;
+        res.push(obj);
+        value.forEach((item, i) => {
+          const paths = [...pathArr];
+          paths.push(i);
+          this.buildTreeData('', item, res2, paths);
         });
       } else {
-        res.push({
-          id: this.nid++,
-          key,
-          label: value,
-        });
+        res.push(obj);
       }
     },
     recursivelySetExpanded(node, val) {
@@ -119,8 +107,8 @@ export default {
       }
     },
     generator(node, data) {
-      console.log(node);
-      this.visible = true;
+      console.log(node, JSON.stringify(data.path));
+      // this.visible = true;
     },
   },
 };
