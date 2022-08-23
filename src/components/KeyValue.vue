@@ -79,7 +79,7 @@ export default {
     text-overflow: ellipsis;
   }
   .ellipsis {
-    max-width: 130px;
+    max-width: 300px;
     text-overflow: ellipsis;
   }
   .all-radius {
